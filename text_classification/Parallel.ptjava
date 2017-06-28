@@ -1,0 +1,43 @@
+package cluster;
+import java.io.File;
+public class Parallel{
+	File file;
+	long start,end;
+	KMeans kalgo;
+public Parallel(File file){
+	this.file = file;
+}
+public void startRunning(){
+	TaskID id = runPSNM() notify(finishedBuilding());
+}
+TASK public void runPSNM(){
+	TaskID kmean = kmeans();
+	TaskID view = showResult() dependsOn(kmean);
+	try {
+		view.waitTillFinished();
+		//System.out.println(file.length+" "+iconlist.size()+" "+blurlist.size()+" size");
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+}
+TASK public void kmeans(){
+	start = System.currentTimeMillis();
+	kalgo = new KMeans();
+	kalgo.clear();
+	kalgo.readDocuments(file);
+	System.out.println("file read");
+	kalgo.generateVector();
+	System.out.println("vector");
+	kalgo.kmeans();
+	end = System.currentTimeMillis();
+}
+TASK public void showResult(){
+	ViewCluster vc = new ViewCluster(kalgo.cls);
+	vc.setSize(600,400);
+	vc.setVisible(true);
+}
+private void finishedBuilding() {
+	System.out.println("over");
+	System.out.println("Parallel "+(end-start));
+}
+}

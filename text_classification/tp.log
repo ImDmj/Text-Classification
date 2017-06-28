@@ -1,0 +1,21 @@
+Say you test 20 patients and you actually know whether they have cancer or not
+
+So we have a simple Table
+
+
+Patient     Test=Pos    Test = Neg
+Cancer          8                 2
+No cancer     1                   9
+
+So: 
+P(P/C) = True positives 8/10
+P((N/C) =False negative = 2/10
+P(N/NC) = True Negative 9/10
+P(P/NC) = False positive  1/10
+
+Precision = TP / (TP+FP)
+Recall = TP / (TP+FN)
+
+
+http://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-clustering-1.html
+http://stats.stackexchange.com/questions/95731/how-to-calculate-purity
